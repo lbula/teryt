@@ -1,7 +1,7 @@
 # teryt
 Teryt ZF2 module
 
-1. Aktualne pliki z bazą danych ulic i miejscowości pobieramy ze strony:
+Aktualne pliki z bazą danych ulic i miejscowości pobieramy ze strony:
 	
 http://www.stat.gov.pl/broker/access/prefile/listPreFiles.jspa
 	
@@ -9,7 +9,7 @@ Należy pobrać:
 - katalog miejscowości (SIMC)
 - katalog ulic (ULIC)
 
-2. Pliki umieszczamy w katalogu z aplikacją, w podkatalogu:
+Pliki umieszczamy w katalogu z aplikacją, w podkatalogu:
 	
 /tmp/gus
 	
@@ -18,7 +18,7 @@ Następnie rozpakowujemy (w tym samym katalogu):
 unzip SIMC_ddmmyyyy.zip
 unzip ULIC_ddmmyyyy.zip
 	
-3. Przechodzimy do katalogu:
+Przechodzimy do katalogu:
 	
 scripts
 	
@@ -28,7 +28,7 @@ actualize_gus.sh
 	
 Skrypt wykonuje się ok. 30 minut.
 	
-4. W wyniku wywołania skryptu w katalogu:
+W wyniku wywołania skryptu w katalogu:
 
 /tmp/gus
 	
