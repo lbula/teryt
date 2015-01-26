@@ -27,8 +27,9 @@ class DistrictTable
             $select->columns(array('id', 'name'));
         });
         
-        foreach($resultSet as $row)
-            $result[$row->id] = $row->name;
+        if (!empty($resultSet))
+			foreach($resultSet as $row)
+				$result[$row->id] = $row->name;
         
         asort($result);
         return $result;

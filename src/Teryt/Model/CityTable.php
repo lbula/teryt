@@ -27,8 +27,9 @@ class CityTable
             $select->columns(array('id', 'name'));
         });
         
-        foreach($resultSet as $row)
-            $result[$row->id] = $row->name;
+        if (!empty($resultSet))
+			foreach($resultSet as $row)
+				$result[$row->id] = $row->name;
         
         asort($result);
         return $result;
@@ -43,10 +44,11 @@ class CityTable
             $select->where(array('has_districts' => 1));
         });
         
-        foreach($resultSet as $row)
-            $result[$row->id] = array('name' => $row->name,
-                                      'region' => $row->region,
-                                      'county' => $row->county);
+        if (!empty($resultSet))
+			foreach($resultSet as $row)
+				$result[$row->id] = array('name' => $row->name,
+										  'region' => $row->region,
+										  'county' => $row->county);
         
         return $result;
     }
@@ -60,8 +62,9 @@ class CityTable
             $select->where(array('has_districts' => 0));
         });
         
-        foreach($resultSet as $row)
-            $result[$row->id] = $row->name;
+        if (!empty($resultSet))
+			foreach($resultSet as $row)
+				$result[$row->id] = $row->name;
         
         return $result;
     }

@@ -29,14 +29,27 @@ class Street
     public function readStreetsByDistricts($districts, $streetXmlData)
     {
         $streets = array();
-        foreach ($districts as $cityId => $districtIds){
-            foreach ($districtIds as $districtId){
-                foreach ($streetXmlData as $record){
-                    if (array_key_exists('SYM', $record) && $record['SYM'] == $districtId){
-                        $name2 = array_key_exists('NAZWA_2', $record) ? $record['NAZWA_2'] : '';
-                        $streets[$cityId][$districtId][$record['SYM_UL']]['prefix'] = $record['CECHA'];
-                        $streets[$cityId][$districtId][$record['SYM_UL']]['name_1'] = $record['NAZWA_1'];
-                        $streets[$cityId][$districtId][$record['SYM_UL']]['name_2'] = $name2;
+        
+        if (!empty($districts))
+        {
+            foreach ($districts as $cityId => $districtIds)
+            {
+                if (!empty($districtIds))
+                {
+                    foreach ($districtIds as $districtId)
+                    {
+                        if (!empty($streetXmlData))
+                        {
+                            foreach ($streetXmlData as $record)
+                            {
+                                if (array_key_exists('SYM', $record) && $record['SYM'] == $districtId){
+                                    $name2 = array_key_exists('NAZWA_2', $record) ? $record['NAZWA_2'] : '';
+                                    $streets[$cityId][$districtId][$record['SYM_UL']]['prefix'] = $record['CECHA'];
+                                    $streets[$cityId][$districtId][$record['SYM_UL']]['name_1'] = $record['NAZWA_1'];
+                                    $streets[$cityId][$districtId][$record['SYM_UL']]['name_2'] = $name2;
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -49,16 +62,23 @@ class Street
     public function readStreetsByCities($cities, $streetXmlData)
     {
         $result = array();
-        foreach ($cities as $cityId => $foo)
+        
+        if (!empty($cities))
         {
-            foreach ($streetXmlData as $record)
+            foreach ($cities as $cityId => $foo)
             {
-                if (array_key_exists('SYM', $record) && $record['SYM'] == $cityId)
+                if (!empty($streetXmlData))
                 {
-                    $name2 = array_key_exists('NAZWA_2', $record) ? ' ' . $record['NAZWA_2'] : '';
-                    $result[$cityId][0][$record['SYM_UL']]['prefix'] = $record['CECHA'];
-                    $result[$cityId][0][$record['SYM_UL']]['name_1'] = $record['NAZWA_1'];
-                    $result[$cityId][0][$record['SYM_UL']]['name_2'] = $name2;
+                    foreach ($streetXmlData as $record)
+                    {
+                        if (array_key_exists('SYM', $record) && $record['SYM'] == $cityId)
+                        {
+                            $name2 = array_key_exists('NAZWA_2', $record) ? ' ' . $record['NAZWA_2'] : '';
+                            $result[$cityId][0][$record['SYM_UL']]['prefix'] = $record['CECHA'];
+                            $result[$cityId][0][$record['SYM_UL']]['name_1'] = $record['NAZWA_1'];
+                            $result[$cityId][0][$record['SYM_UL']]['name_2'] = $name2;
+                        }
+                    }
                 }
             }
         }
@@ -73,18 +93,27 @@ class Street
         
         $dbPlatform = $streetsTableGateway->getAdapter()->getPlatform();
         
-        foreach ($streetData as $cityId => $city)
+        if (!empty($streetData))
         {
-            foreach ($city as $districtId => $district)
+            foreach ($streetData as $cityId => $city)
             {
-                foreach ($district as $streetId => $street)
+                if (!empty($city))
                 {
-                    $prefix = $dbPlatform->quoteValue($street['prefix']);
-                    $name1 = $dbPlatform->quoteValue($street['name_1']);
-                    $name2 = $dbPlatform->quoteValue($street['name_2']);
-                    $line = 'insert into street (id,prefix,name_1,name_2,city_id_fk,district_id_fk) ';
-                    $line .= 'values (' . $streetId . ',' . $prefix . ',' . $name1 . ',' . $name2 . ',' . $cityId . ',' . $districtId . ');';
-                    fwrite($file, $line."\n");
+                    foreach ($city as $districtId => $district)
+                    {
+                        if (!empty($district))
+                        {
+                            foreach ($district as $streetId => $street)
+                            {
+                                $prefix = $dbPlatform->quoteValue($street['prefix']);
+                                $name1 = $dbPlatform->quoteValue($street['name_1']);
+                                $name2 = $dbPlatform->quoteValue($street['name_2']);
+                                $line = 'insert into street (id,prefix,name_1,name_2,city_id_fk,district_id_fk) ';
+                                $line .= 'values (' . $streetId . ',' . $prefix . ',' . $name1 . ',' . $name2 . ',' . $cityId . ',' . $districtId . ');';
+                                fwrite($file, $line."\n");
+                            }
+                        }
+                    }
                 }
             }
         }
