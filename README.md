@@ -1,5 +1,4 @@
-# teryt
-Teryt ZF2 module
+# Teryt ZF2 module
 
 Aktualne pliki z bazą danych ulic i miejscowości pobieramy ze strony:
 	
