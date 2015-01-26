@@ -28,8 +28,8 @@ class DistrictTable
         });
         
         if (!empty($resultSet))
-			foreach($resultSet as $row)
-				$result[$row->id] = $row->name;
+            foreach($resultSet as $row)
+                $result[$row->id] = $row->name;
         
         asort($result);
         return $result;

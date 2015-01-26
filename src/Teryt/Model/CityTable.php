@@ -28,8 +28,8 @@ class CityTable
         });
         
         if (!empty($resultSet))
-			foreach($resultSet as $row)
-				$result[$row->id] = $row->name;
+            foreach($resultSet as $row)
+                $result[$row->id] = $row->name;
         
         asort($result);
         return $result;
@@ -45,10 +45,10 @@ class CityTable
         });
         
         if (!empty($resultSet))
-			foreach($resultSet as $row)
-				$result[$row->id] = array('name' => $row->name,
-										  'region' => $row->region,
-										  'county' => $row->county);
+            foreach($resultSet as $row)
+                $result[$row->id] = array('name' => $row->name,
+                                          'region' => $row->region,
+                                          'county' => $row->county);
         
         return $result;
     }
@@ -63,8 +63,8 @@ class CityTable
         });
         
         if (!empty($resultSet))
-			foreach($resultSet as $row)
-				$result[$row->id] = $row->name;
+            foreach($resultSet as $row)
+                $result[$row->id] = $row->name;
         
         return $result;
     }
